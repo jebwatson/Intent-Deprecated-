@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp3.1;net472</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>application.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\MainView.xaml" />
+    <None Remove="Views\OtherView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Dapplo.Microsoft.Extensions.Hosting.AppServices" Version="0.3.35" />
+    <PackageReference Include="Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro" Version="0.3.35" />
+  </ItemGroup>
+</Project>
