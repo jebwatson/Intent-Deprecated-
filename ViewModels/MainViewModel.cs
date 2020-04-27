@@ -8,7 +8,8 @@ using System;
 using Caliburn.Micro;
 using Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro;
 using Dapplo.Microsoft.Extensions.Hosting.Wpf;
-using Microsoft.Extensions.DependencyInjection;
+using Intent.Exceptions;
+using Intent.Models;
 
 namespace Intent.ViewModels
 {
@@ -17,26 +18,59 @@ namespace Intent.ViewModels
     /// </summary>
     public class MainViewModel : Screen, ICaliburnMicroShell
     {
+        private readonly IIntentionRepository intentionRepository;
         private readonly IServiceProvider serviceProvider;
         private readonly IWindowManager windowManager;
         private readonly IWpfContext wpfContext;
+        private IIntentionViewModel selectedIntention;
 
-        public MainViewModel(IWpfContext wpfContext, IServiceProvider serviceProvider, IWindowManager windowManager)
+        public MainViewModel(IWpfContext wpfContext, IServiceProvider serviceProvider, IWindowManager windowManager, IIntentionRepository intentionRepository)
         {
             this.wpfContext = wpfContext;
             this.serviceProvider = serviceProvider;
             this.windowManager = windowManager;
+            this.intentionRepository = intentionRepository;
         }
 
-        public void Exit()
+        /// <summary>
+        /// Gets a list of the user's intentions.
+        /// </summary>
+        public BindableCollection<IIntentionViewModel> Intentions { get; } = new BindableCollection<IIntentionViewModel>();
+
+        public IIntentionViewModel SelectedIntention
         {
-            this.wpfContext.WpfApplication.Shutdown();
+            get => this.selectedIntention;
+            set
+            {
+                this.selectedIntention = value;
+                this.NotifyOfPropertyChange(() => this.SelectedIntention.Value);
+            }
         }
 
-        public void Open()
+        /// <summary>
+        /// Adds a new intention to the intention repository and updates the view.
+        /// </summary>
+        public void Add()
         {
-            var otherWindow = this.serviceProvider.GetService<OtherViewModel>();
-            this.windowManager.ShowWindow(otherWindow);
+            // Add new intention
+            var intention = new IntentionViewModel();
+
+            try
+            {
+                this.intentionRepository.TryAddIntention(intention.Value);
+            }
+            catch (DataAccessException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            this.Intentions.Add(intention);
         }
+
+        //public void Exit()
+        //{
+        //    this.wpfContext.WpfApplication.Shutdown();
+        //}
     }
 }

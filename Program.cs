@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Dapplo.Microsoft.Extensions.Hosting.AppServices;
 using Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro;
 using Dapplo.Microsoft.Extensions.Hosting.Wpf;
+using Intent.Models;
 using Intent.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,11 +47,11 @@ namespace Intent
                        // Setup CaliburnMicro
                       .ConfigureCaliburnMicro<MainViewModel>()
 
-                       // Provide a view model
+                       // Register dependencies with the container
                       .ConfigureServices(serviceCollection =>
                        {
-                           // Make OtherWindow available for DI to MainWindow
-                           serviceCollection.AddTransient<OtherViewModel>();
+                           serviceCollection.AddTransient<IntentionViewModel, IntentionViewModel>();
+                           serviceCollection.AddSingleton<IIntentionRepository, IntentionRepository>();
                        })
                       .UseConsoleLifetime()
 

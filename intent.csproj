@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="Views\MainView.xaml" />
-    <None Remove="Views\OtherView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
