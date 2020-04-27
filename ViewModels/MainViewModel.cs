@@ -22,7 +22,6 @@ namespace Intent.ViewModels
         private readonly IServiceProvider serviceProvider;
         private readonly IWindowManager windowManager;
         private readonly IWpfContext wpfContext;
-        private IIntentionViewModel selectedIntention;
 
         public MainViewModel(IWpfContext wpfContext, IServiceProvider serviceProvider, IWindowManager windowManager, IIntentionRepository intentionRepository)
         {
@@ -36,16 +35,6 @@ namespace Intent.ViewModels
         /// Gets a list of the user's intentions.
         /// </summary>
         public BindableCollection<IIntentionViewModel> Intentions { get; } = new BindableCollection<IIntentionViewModel>();
-
-        public IIntentionViewModel SelectedIntention
-        {
-            get => this.selectedIntention;
-            set
-            {
-                this.selectedIntention = value;
-                this.NotifyOfPropertyChange(() => this.SelectedIntention.Value);
-            }
-        }
 
         /// <summary>
         /// Adds a new intention to the intention repository and updates the view.
