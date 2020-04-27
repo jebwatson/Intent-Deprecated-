@@ -10,7 +10,7 @@ using Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro;
 using Dapplo.Microsoft.Extensions.Hosting.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace intent.ViewModels
+namespace Intent.ViewModels
 {
     /// <summary>
     /// A simple main view model

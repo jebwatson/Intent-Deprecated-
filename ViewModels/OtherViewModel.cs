@@ -6,7 +6,7 @@
 
 using Caliburn.Micro;
 
-namespace intent.ViewModels
+namespace Intent.ViewModels
 {
     public class OtherViewModel : Screen
     {
