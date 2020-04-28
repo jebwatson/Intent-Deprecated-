@@ -7,7 +7,6 @@
 using System;
 using Caliburn.Micro;
 using Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro;
-using Dapplo.Microsoft.Extensions.Hosting.Wpf;
 using Intent.Exceptions;
 using Intent.Models;
 
@@ -18,16 +17,22 @@ namespace Intent.ViewModels
     /// </summary>
     public class MainViewModel : Screen, ICaliburnMicroShell
     {
-        private readonly IIntentionRepository intentionRepository;
-        private readonly IServiceProvider serviceProvider;
-        private readonly IWindowManager windowManager;
-        private readonly IWpfContext wpfContext;
+        //private readonly IServiceProvider serviceProvider;
+        //private readonly IWindowManager windowManager;
+        //private readonly IWpfContext wpfContext;
 
-        public MainViewModel(IWpfContext wpfContext, IServiceProvider serviceProvider, IWindowManager windowManager, IIntentionRepository intentionRepository)
+        //public MainViewModel(IWpfContext wpfContext, IServiceProvider serviceProvider, IWindowManager windowManager, IIntentionRepository intentionRepository)
+        //{
+        //    this.wpfContext = wpfContext;
+        //    this.serviceProvider = serviceProvider;
+        //    this.windowManager = windowManager;
+        //    this.intentionRepository = intentionRepository;
+        //}
+
+        private readonly IIntentionRepository intentionRepository;
+
+        public MainViewModel(IIntentionRepository intentionRepository)
         {
-            this.wpfContext = wpfContext;
-            this.serviceProvider = serviceProvider;
-            this.windowManager = windowManager;
             this.intentionRepository = intentionRepository;
         }
 
